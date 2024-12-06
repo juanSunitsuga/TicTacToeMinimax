@@ -59,6 +59,7 @@ def minimax(board, depth, isMax):
     if not isMovesLeft(board):
         return 0
 
+    # Fungsi dari isMax adalah untuk memprediksi bagaimana player akan bermain dan bagaimana computer akan mengantisipasi.
     if isMax:
         # init best
         best = -1000
@@ -66,16 +67,17 @@ def minimax(board, depth, isMax):
         for i in range(3):
             for j in range(3):
                 # Simulasikan langkah pemain.
-                if board[i][j] == '_':
+                if board[i][j] == '_': 
+                    # Tracking Move
                     board[i][j] = player
                     # Ambil nilai maksimum dari fungsi rekursif minimax dan melakukan
-                    # Backtracking: Kembalikan papan ke keadaan semula setelah simulasi langkah.
                     best = max(best, minimax(board, depth + 1, not isMax))
+                    # Backtracking: Kembalikan papan ke keadaan semula setelah simulasi langkah.
                     board[i][j] = '_'
         # Kembalikan skor terbaik.
         return best
     else:
-        # bedanya dengan if diatas adalah, program ini mengambil nilai minimum
+        # bedanya dengan if diatas adalah, program ini mengambil nilai minimum untuk computer
         best = 1000
         for i in range(3):
             for j in range(3):
