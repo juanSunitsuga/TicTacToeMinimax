@@ -59,6 +59,7 @@ def minimax(board, depth, isMax):
     if not isMovesLeft(board):
         return 0
 
+
     if isMax:
         # init best
         best = -1000
@@ -95,7 +96,9 @@ def findBestMove(board):
             if board[i][j] == '_':
                 board[i][j] = opponent
                 moveVal = minimax(board, 0, True)  # Switch roles: player becomes maximizing
+                # Backtracking: Kembalikan papan ke keadaan semula setelah simulasi.
                 board[i][j] = '_'
+                # Jika skor lebih kecil dari bestVal (lebih optimal untuk minimizer), perbarui bestMove dan bestVal.
                 if moveVal < bestVal:  # Minimize score for opponent
                     bestMove = (i, j)
                     bestVal = moveVal
@@ -165,13 +168,19 @@ Algoritma Minimax adalah algoritma yang digunakan untuk mencari solusi optimal d
 Algoritma ini dibangun atas strategi minimax, yang mengasumsikan bahwa AI akan mencoba semua posisi papan yang 
 dapat dilakukan oleh player dan mencari solusi yang memberikan skor terbesar bagi AI. 
 
+Dalam algoritma Minimax terdapat 2 hal yang utama: Recursive & Backtracking
+Fungsi rekursif memodelkan seluruh pohon permainan untuk mengevaluasi semua kemungkinan langkah hingga akhir permainan.
+Backtracking digunakan untuk memastikan setiap cabang dari pohon permainan dievaluasi tanpa memengaruhi cabang lainnya.
+
 Completeness: 
-Program ini bisa disebut complete, karena solusi yang dimunculkan oleh computer yaitu win/draw. Computer AI disini
-dibuat agar tidak pernah kalah.
+Program ini bisa disebut complete, karena solusi yang dimunculkan oleh computer yaitu win/draw pada setiap skenario yang ada. 
+Computer AI disini dibuat agar tidak pernah kalah. Hasil akhir permainan hanya bisa berupa kemenangan untuk komputer 
+(jika pemain membuat kesalahan) atau seri (jika pemain bermain optimal).
 
 Optimality:
 Algoritma minimax adalah optimal, karena ia dapat menemukan solusi optimal yang paling efektif dalam permainan 
-tic tac toe untuk mencegah player menang. 
+tic tac toe untuk mencegah player menang. Jika ada langkah terbaik yang pasti menang, AI akan memilih langkah tersebut.
+Jika tidak ada langkah untuk menang, AI akan memilih langkah untuk mencegah pemain menang.
 
 Time Complexity:
 Program ini memiliki time complexity O(2^n) dengan n sebagai depth dari tree nya. Tree disini mengacu kepada pilihan 
