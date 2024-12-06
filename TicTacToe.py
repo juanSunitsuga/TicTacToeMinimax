@@ -7,6 +7,11 @@ board = [['_' for _ in range(3)] for _ in range(3)]
 
 
 def isMovesLeft(board):
+    """
+    Function untuk cek apakah ada langkah yang tersisa di papan permainan.
+    :param board:
+    :return:
+    """
     for row in board:
         if '_' in row:
             return True
@@ -14,7 +19,11 @@ def isMovesLeft(board):
 
 
 def evaluate(b):
-    # Check rows and columns
+    """
+    Mengevaluasi skor saat ini dari papan untuk menentukan apakah ada player yang menang.
+    :param b:
+    :return:
+    """
     for i in range(3):
         if b[i][0] == b[i][1] == b[i][2] and b[i][0] != '_':
             return 10 if b[i][0] == player else -10
@@ -32,23 +41,41 @@ def evaluate(b):
 
 # Recursive function
 def minimax(board, depth, isMax):
+    """
+    Menghitung nilai terbaik dari semua kemungkinan langkah di masa depan menggunakan algoritma minimax.
+    :param board:
+    :param depth:
+    :param isMax:
+    :return:
+    """
     score = evaluate(board)
 
+    # Jika ada pemenang (evaluate mengembalikan 10 atau -10), kembalikan nilai tersebut.
+    # (-10 untuk computer yang menang 10 untuk player yang menang)
     if score == 10 or score == -10:
         return score
+
+    # Jika tidak ada langkah tersisa, kembalikan 0 (draw).
     if not isMovesLeft(board):
         return 0
 
     if isMax:
+        # init best
         best = -1000
+        # Iterasi setiap kotak kosong di papan
         for i in range(3):
             for j in range(3):
+                # Simulasikan langkah pemain.
                 if board[i][j] == '_':
                     board[i][j] = player
+                    # Ambil nilai maksimum dari fungsi rekursif minimax dan melakukan
+                    # Backtracking: Kembalikan papan ke keadaan semula setelah simulasi langkah.
                     best = max(best, minimax(board, depth + 1, not isMax))
                     board[i][j] = '_'
+        # Kembalikan skor terbaik.
         return best
     else:
+        # bedanya dengan if diatas adalah, program ini mengambil nilai minimum
         best = 1000
         for i in range(3):
             for j in range(3):
