@@ -175,12 +175,12 @@ Fungsi rekursif memodelkan seluruh pohon permainan untuk mengevaluasi semua kemu
 Backtracking digunakan untuk memastikan setiap cabang dari pohon permainan dievaluasi tanpa memengaruhi cabang lainnya.
 
 Completeness: 
-Program ini bisa disebut complete, karena solusi yang dimunculkan oleh computer yaitu win/draw pada setiap skenario yang ada. 
+Program ini bisa disebut complete, karena solusi yang dimunculkan oleh computer selalu win atau draw pada setiap skenario yang ada. 
 Computer AI disini dibuat agar tidak pernah kalah. Hasil akhir permainan hanya bisa berupa kemenangan untuk komputer 
 (jika pemain membuat kesalahan) atau seri (jika pemain bermain optimal).
 
 Optimality:
-Algoritma minimax adalah optimal, karena ia dapat menemukan solusi optimal yang paling efektif dalam permainan 
+Algoritma minimax bisa dibilang optimal, karena ia dapat menemukan solusi optimal yang paling efektif dalam permainan 
 tic tac toe untuk mencegah player menang. Jika ada langkah terbaik yang pasti menang, AI akan memilih langkah tersebut.
 Jika tidak ada langkah untuk menang, AI akan memilih langkah untuk mencegah pemain menang.
 
